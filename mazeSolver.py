@@ -29,13 +29,13 @@ def distanceOptimisation(walls, w, h):
 
 def DepthFirstSearch(maze, w, h, display = False):
     '''
-        Uses the depth first search algorithms to check all cells
+        Uses the depth first search algorithm to check all the cells
         until the endpoint is finished
 
         The path is kept in the same name array, each visited cells'
         coordinates are added in the path array when entering the cell
         and poped if the path doesn't lead anywhere
-        '''
+    '''
     if display == True:
         printMaze(maze, path, height, width)
         # sleep(0.01) # Can be usefull for bigger configs
@@ -50,13 +50,13 @@ def DepthFirstSearch(maze, w, h, display = False):
         return 0
     smaller = distanceOptimisation(walls, w, h)
 
-    # Applies the algorithm for the samllest distance parameter
+    # Applies the algorithm for the smallest distance parameter
     if (DepthFirstSearch(maze, w + (smaller == 1) - (smaller == 3), h - (smaller == 0) + (smaller == 2), display) == 1):
         return (1)
     else:
         path.pop(-1)
 
-    # Applies the algorithm until all the paths are checked
+    # Applies the algorithm until all paths are checked
     if (DepthFirstSearch(maze, w, h, display) == 1):
         return (1)
     else:

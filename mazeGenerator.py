@@ -35,7 +35,7 @@ class Cell():
 def initMaze(height, width):
     ''' 
         Initialises the maze grid, with all walls up
-        Theses walls will then get removed by the algorithm to get the final maze
+        Theses walls will then one by one get removed by the algorithm to get the final maze
     '''
     maze = [[Cell() for j in range(height)] for i in range(width)]
     return maze
@@ -48,7 +48,8 @@ def createHoles(maze, w, h, prevCell, height, width, display = False):
     if display == True:
         printMaze(maze, None, height, width)
         sleep(0.01)
-    maze[w][h].visited = 1 # sets cells to visited to avoid infinite loops
+
+    maze[w][h].visited = 1
 
     # Removes wall where the previous cell was e.g. removes the north wall when coming from south
     if (prevCell != 0): 
