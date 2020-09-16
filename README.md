@@ -7,10 +7,6 @@ To launch the maze generator :
 
 To launch the maze solver :
 `python3 mazeSolver.py`
-This opertaion will generate a random maze grid and solve it
+This operation will generate a random maze grid and solve it
 
-
-
-I used breadth first search as my solving algorithm
-
-The display is completely on the standard output
+All the parameters and display can be modified at the top of the files
