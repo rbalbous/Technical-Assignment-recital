@@ -16,7 +16,7 @@ I chose this solution because it is quick and very visual.
 
 For the solver I implemented a recursive breadth first search algorithm that chooses the direction
 based on the distance with the endpoint. 
-The path is stored in an array, each node is added when we first check it, and they are deleted if the path
+The path is stored in an array, each node is added when we first check them, and they are deleted if the path
 goes backward. When the enpoint is reached, each recursive function returns, leaving only in the path array
 the informations we need.
 I used this solution because it is very effecient in this case where we only have 1 correct path.
