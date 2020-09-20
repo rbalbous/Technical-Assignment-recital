@@ -4,18 +4,21 @@
 '''
 
 def printFirstLine(i, maze, printer, width):
-    string = "+"
+    printer.append(["+"])
     for j in range(width):
         if (maze[j][i].north == 1):
-            string += '---'
+            printer[-1].append('-')
+            printer[-1].append('-')
+            printer[-1].append('-')
         else:
-            string += '   '
-        string += '+'
-    printer.append(string)
+            printer[-1].append(' ')
+            printer[-1].append(' ')
+            printer[-1].append(' ')
+        printer[-1].append('+')
     return printer
 
 def printMiddleLine(i, maze, path, printer, width):
-    string = ''
+    printer.append([''])
     for j in range(width):
         printing = 0
         for index in range(len(path)):
@@ -23,34 +26,81 @@ def printMiddleLine(i, maze, path, printer, width):
                 printing = 1
         if (maze[j][i].west == 1):
             if printing == 0:
-                string += '|   '
+                printer[-1].append('|')
+                printer[-1].append(' ')
+                printer[-1].append(' ')
+                printer[-1].append(' ')
             else:
-                string += '| o '
+                printer[-1].append('|')
+                printer[-1].append(' ')
+                printer[-1].append('o')
+                printer[-1].append(' ')
         elif printing == 1:
-            string += '  o '
+            printer[-1].append(' ')
+            printer[-1].append(' ')
+            printer[-1].append('o')
+            printer[-1].append(' ')
         else:
-            string += '    '
-    string += '|'
-    printer.append(string)
+            printer[-1].append(' ')
+            printer[-1].append(' ')
+            printer[-1].append(' ')
+            printer[-1].append(' ')
+    printer[-1].append('|')
     return printer
 
 def printSecondLine(i, maze, printer, width):
-    string = ''
+    printer.append([''])
     for j in range(width):
         if (maze[j][i].west == 1):
-            string += '|   '
+            printer[-1].append('|')
+            printer[-1].append(' ')
+            printer[-1].append(' ')
+            printer[-1].append(' ')
         else:
-            string += '    '
-    string += '|'
-    printer.append(string)
+            printer[-1].append(' ')
+            printer[-1].append(' ')
+            printer[-1].append(' ')
+            printer[-1].append(' ')
+    printer[-1].append('|')
     return printer
 
 def printLastLine(printer, width):
-    string = ''
+    printer.append([''])
     for i in range(width):
-        string += '+---'
-    string += '+'
-    printer.append(string)
+        printer[-1].append('+')
+        printer[-1].append('-')
+        printer[-1].append('-')
+        printer[-1].append('-')
+    printer[-1].append('+')
+    return printer
+
+def displayPrinter(printer):
+    for item in printer:
+        print(''.join(item))
+
+
+def updatePath(maze, path, prevPath, h, w, printer):
+    if (prevPath == 0):
+        printer[2 * h + 1][3 + 4 * w] = ' '
+    else:
+        printer[2 * h + 1][3 + 4 * w] = 'o'
+    displayPrinter(printer)
+    return printer
+
+def updateWalls(maze, prevCell, h, w, printer):
+    if (prevCell == 1):
+        printer[2 * h][1 + 4 * w] = ' '
+        printer[2 * h][2 + 4 * w] = ' '
+        printer[2 * h][3 + 4 * w] = ' '
+    elif (prevCell == 2):
+        printer[2 * h + 1][5 + 4 * w] = ' '
+    elif (prevCell == 3):
+        printer[2 * (h + 1)][1 + 4 * w] = ' '
+        printer[2 * (h + 1)][2 + 4 * w] = ' '
+        printer[2 * (h + 1)][3 + 4 * w] = ' '
+    elif (prevCell == 4):
+        printer[2 * h + 1][1 + 4 * w] = ' '
+    displayPrinter(printer)
     return printer
 
 def printMaze(maze, path, height, width):
@@ -62,5 +112,5 @@ def printMaze(maze, path, height, width):
         else:
             printer = printMiddleLine(i, maze, path, printer, width)
     printer = printLastLine(printer, width)
-    for item in printer:
-        print(item)
+    displayPrinter(printer)
+    return printer
